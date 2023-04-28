@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ConcertController extends Controller
 {
+    public function liste(){
+        return view("home", ["concert" => Concert::all()]);
+    }
     /**
      * Display a listing of the resource.
      */
