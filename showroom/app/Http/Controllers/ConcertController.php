@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Concert;
 use Illuminate\Http\Request;
@@ -9,6 +10,14 @@ class ConcertController extends Controller
 {
     public function liste(){
         return view("home", ["concert" => Concert::all()]);
+    }
+
+    public function reservation(){
+        $concert = DB::table('concerts')->where('id', 1)->get();
+        // DD($titre = [Concert::all('titre')->where('id', 1)->first()]);
+        return view("reservation", ['concert' => $concert[0] ]);
+        
+
     }
     /**
      * Display a listing of the resource.
