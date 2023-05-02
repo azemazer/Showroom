@@ -14,6 +14,18 @@ return new class extends Migration
         Schema::create('concerts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string("titre");
+            $table->string("artiste");
+            $table->string("genre");
+            $table->string("description");
+            $table->string("organisateur");
+            $table->string("date");
+            $table->string("lieu");
+            $table->string("imgartiste");
+            $table->string("imglieu");
+            $table->integer("reservations");
+            $table->integer("reservationsmax");
+            $table->boolean("full");
         });
     }
 
