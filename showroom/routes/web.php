@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [ConcertController::class, "liste"])->name("todo.list"); // <------- Chemin de la page d'accueil
+Route::get('/', [ConcertController::class, "liste"])->name("concert.list"); // <------- Chemin de la page d'accueil
 
 require __DIR__.'/auth.php';
