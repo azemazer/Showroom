@@ -57,4 +57,12 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    // Show reservations
+    public function show (Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
 }
