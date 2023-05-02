@@ -17,8 +17,8 @@
             @auth
                 <a href="/profile">Profil</a>
             @else
-                    <a href="/dashboard">Se connecter</a>
-                    <a href="/register">Créer un compte</a>
+                <a href="/dashboard">Se connecter</a>
+                <a href="/register">Créer un compte</a>
             @endif
         </div>
     </nav>

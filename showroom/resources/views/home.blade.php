@@ -28,5 +28,4 @@
         <h2> Pas de concerts. </h2>
         @endforelse
     </div>
-</body>
-</html>
+@endsection
