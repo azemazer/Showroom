@@ -2,30 +2,48 @@
     <div class="d-flex justify-content-center">
         @forelse ($concert as $show)
         @if ($show->full)
-        <div class="row ms-1">
-            <div class="col ms-5">
-                <img src="{{$show->imgartiste}}" width="640" height="450">
-            </div>
-            <div class="col mt-4">
-                <h2>{{$show->titre}}</h2>
-                <h3>{{$show->artiste}}</h3>
-                <a href="/" class="btn btn-dark" title = "Réserver pour" role="button"> Réserver </a>
-            </div>
+        <div class="card" style="width: 30rem;">
+            <img src="{{$show->imgartiste}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title">{{$show->titre}}</h3>
+          <h5 class="card-title">{{$show->artiste}}</h5>
+          <p class="card-text">{{$show->description}}</p>
         </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Genre : {{$show->genre}}</li> 
+          <li class="list-group-item">Lieu : {{$show->lieu}}</li>
+          <li class="list-group-item">Date : {{$show->date}}</li>
+          <li class="list-group-item">Organisateur : {{$show->organisateur}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="btn btn-primary">Reserver</a>
+          
+        </div>
+    </div>
         @else
-        <div class="row ms-1">
-            <div class="col ms-5">
-                <img src="{{$show->imgartiste}}" width="640" height="450">
-            </div>
-            <div class="col mt-4">
-                <h2>{{$show->titre}}</h2>
-                <h3>{{$show->artiste}}</h3>
-                <a href="/" class="btn btn-dark" title = "Réserver pour" role="button"> Réserver </a>
-            </div>
+    <div class="card" style="width: 30rem;">
+            <img src="{{$show->imgartiste}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title">{{$show->titre}}</h3>
+          <h5 class="card-title">{{$show->artiste}}</h5>
+          <p class="card-text">{{$show->description}}</p>
         </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Genre : {{$show->genre}}</li> 
+          <li class="list-group-item">Lieu : {{$show->lieu}}</li>
+          <li class="list-group-item">Date : {{$show->date}}</li>
+          <li class="list-group-item">Organisateur : {{$show->organisateur}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="btn btn-primary">Reserver</a>
+          
+        </div>
+    </div>
         @endif
         @empty
         <h2> Pas de concerts. </h2>
         @endforelse
+<div class="col-3 mt-2 ms-5"></div>
+ <div class="col-3 mt-2 ms-5"></div>
     </div>
 @endsection
