@@ -14,6 +14,10 @@ class ConcertController extends Controller
         return view("home", ["concert" => Concert::all()]);
     }
 
+    public function storeview(){
+        return view("admin.addconcert");
+    }
+
     public function reservation(){
         $concert = DB::table('concerts')->where('id', 1)->get();
         // DD($titre = [Concert::all('titre')->where('id', 1)->first()]);
@@ -42,15 +46,33 @@ class ConcertController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'titre' => 'required|string|max:100',
-            'artiste' => 'required|string|max:100',
-            'lieu' => 'required|string|max:100',
-            'description' => 'required|string|max:500',
-        ]);
-        $request->user()->concert()->create($validated);
- 
-        return redirect(route('home'));
+        // $validated = $request->validate([
+        //     'titre' => 'required|string|max:100',
+        //     'artiste' => 'required|string|max:100',
+        //     'lieu' => 'required|string|max:100',
+        //     'description' => 'required|string|max:500',
+        // ]);
+
+        // $request->user()->concert()->create($validated);
+
+        $titre=$request->input('titre');
+        if($titre){
+            $concert=new Concert();
+            $concert->titre=$titre;
+            $concert->artiste=$request->input('artiste');
+            $concert->description=$request->input('description');
+            $concert->genre=$request->input('genre');
+            $concert->lieu=$request->input('lieu');
+            $concert->date=$request->input('date');
+            $concert->organisateur=$request->input('organisateur');
+            $concert->imgartiste=$request->input('imgartiste');
+            $concert->imglieu=$request->input('imglieu');
+            $concert->reservations=$request->input('reservations');
+            $concert->reservationsmax=$request->input('reservationsmax');
+            $concert->full=$request->input('full');
+            $concert->save();
+        }
+        return redirect(route('concert.list'));
     }
 
     /**
