@@ -16,7 +16,7 @@
           <li class="list-group-item">Organisateur : {{$show->organisateur}}</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="btn btn-primary">Reserver</a>
+          <span class='text-danger fw-bold'>SOLD OUT</span>
           
         </div>
     </div>
