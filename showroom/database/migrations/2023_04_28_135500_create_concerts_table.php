@@ -27,6 +27,14 @@ return new class extends Migration
             $table->integer("reservationsmax");
             $table->boolean("full");
         });
+
+        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignId("concert_id")->constrained();
+            $table->foreignId("user_id")->constrained();
+            $table->integer("nbreservation");
+        });
     }
 
     /**

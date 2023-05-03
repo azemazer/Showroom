@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Concert;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,5 +57,29 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    // Show reservations
+    public function show (Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+    public function test (Request $request): View 
+    {
+        // DD($request->user()->id);
+        $concert = Concert::find(1);
+        $concerts = Concert::all();
+
+        $reservations = $concert->reservations()
+        ->where('user_id', $request->user()->id)
+        ->get();
+
+        return view('testreservations', [
+            'user' => $request->user(),
+            'reservations' => $reservations,
+            'concerts' => $concerts,
+        ]);
     }
 }
