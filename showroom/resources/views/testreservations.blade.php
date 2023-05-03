@@ -1,8 +1,14 @@
 @extends("template") @section("title", "Concerts") @section("content")
-    @foreach ($concert->reservations as $reservation)
+    @forelse ($reservations as $reservation)
         @if ($reservation->user_id = $user->id)    
-            <h1>{{$concert->titre}}</h1>
+            @foreach ($concerts as $concert)
+                @if ($concert->id = $reservation->concert_id)
+                    <h1>{{$concert->titre}}</h1>
+                @endif
+            @endforeach
             <span> {{$reservation->nbreservation}} réservations </span>
         @endif
-    @endforeach
+        @empty 
+            <h1>Pas de réservartion.</h1>
+    @endforelse
 @endsection

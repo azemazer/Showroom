@@ -69,13 +69,17 @@ class ProfileController extends Controller
     public function test (Request $request): View 
     {
         // DD($request->user()->id);
+        $concert = Concert::find(1);
+        $concerts = Concert::all();
 
-        $reservations = Concert::find(1)->reservation
-            ->where('user_id', $request->user->id())
-            ->get();
+        $reservations = $concert->reservations()
+        ->where('user_id', $request->user()->id)
+        ->get();
+
         return view('testreservations', [
             'user' => $request->user(),
-            'reservation' => $reservations,
+            'reservations' => $reservations,
+            'concerts' => $concerts,
         ]);
     }
 }

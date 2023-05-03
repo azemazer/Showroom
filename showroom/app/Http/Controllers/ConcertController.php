@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Concert;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ConcertController extends Controller
 {
@@ -29,9 +31,17 @@ class ConcertController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'titre' => 'required|string|max:100',
+            'artiste' => 'required|string|max:100',
+            'lieu' => 'required|string|max:100',
+            'description' => 'required|string|max:500',
+        ]);
+        $request->user()->concert()->create($validated);
+ 
+        return redirect(route('home'));
     }
 
     /**
@@ -39,15 +49,20 @@ class ConcertController extends Controller
      */
     public function show(Concert $concert)
     {
-        //
+        return view('reservation', [
+            'concert' =>$concert,
+        ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Concert $concert)
+    public function edit(Concert $concert): View
     {
-        //
+        $this->authorize('update', $concert);
+
+        return view('editConcert', [
+            'concert' => $concert,
+        ]);
     }
 
     /**
@@ -55,7 +70,17 @@ class ConcertController extends Controller
      */
     public function update(Request $request, Concert $concert)
     {
-        //
+        $this->authorize('update', $concert);
+
+        $validated = $request->validate([
+            'titre' => 'required|string|max:100',
+            'artiste' => 'required|string|max:100',
+            'lieu' => 'required|string|max:100',
+            'description' => 'required|string|max:500',
+        ]);
+        $concert->update($validated);
+ 
+        return redirect(route('home'));
     }
 
     /**
@@ -63,6 +88,10 @@ class ConcertController extends Controller
      */
     public function destroy(Concert $concert)
     {
-        //
+        $this->authorize('delete', $$concert);
+ 
+        $$concert->delete();
+ 
+        return redirect(route('home'));
     }
 }
