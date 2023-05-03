@@ -28,5 +28,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [ConcertController::class, "liste"])->name("concert.list"); // <------- Chemin de la page d'accueil
 Route::get('/reservation', [ConcertController::class, "reservation"])->name("concert.reservation");
-
+Route::resource('concert',ConcertController::class)
+    ->only(['show']);
 require __DIR__.'/auth.php';
