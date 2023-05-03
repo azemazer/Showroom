@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/profilereservation', [ProfileController::class, 'show'])->name('profile.reservations');
 
+Route::get('/testreservation', [ProfileController::class, 'test'])->name('test.reservations');
+
 Route::get('/', [ConcertController::class, "liste"])->name("concert.list"); // <------- Chemin de la page d'accueil
 
 require __DIR__.'/auth.php';

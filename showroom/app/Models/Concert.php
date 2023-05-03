@@ -19,4 +19,9 @@ class Concert extends Model
         'imgartiste',
         'imglieu',
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
