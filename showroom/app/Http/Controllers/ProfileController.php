@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Concert;
+use App\Models\Reservation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,8 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'reservations' => Reservation::all(),
+            'concerts' => Concert::all(),
         ]);
     }
 
@@ -59,6 +62,18 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+
+    //Delete reservation
+    public function reservationDestroy(Reservation $reservation): RedirectResponse
+    {
+        $this->authorize('delete', $reservation);
+
+        $reservation->delete();
+
+        return Redirect::to('/profile');
+    }
+
+
     // Show reservations
     public function show (Request $request): View
     {
@@ -81,5 +96,17 @@ class ProfileController extends Controller
             'reservations' => $reservations,
             'concerts' => $concerts,
         ]);
+    }
+    public function reservations(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 }

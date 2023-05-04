@@ -35,6 +35,8 @@ Route::get('/', [ConcertController::class, "liste"])->name("concert.list"); // <
 Route::get('/reservation', [ConcertController::class, "reservation"])->name("concert.reservation");
 Route::resource('concert',ConcertController::class)
     ->only(['show', 'store']);
+
+Route::delete('/profiledestroy', [ProfileController::class, 'reservationDestroy'])->name('profile.reservationDestroy');
 // Route::get('/addconcert', [ConcertController::class, "store"])->name("concert.store");
 Route::get('/addconcertview', [ConcertController::class, "storeview"])->name("admin.addconcertview");
 require __DIR__.'/auth.php';
