@@ -122,7 +122,7 @@ class ConcertController extends Controller
      */
     public function destroy(Concert $concert)
     {
-        $this->authorize('delete', $$concert);
+        $this->authorize('delete', $concert);
  
         $$concert->delete();
  
