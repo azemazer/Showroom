@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Concert;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +12,9 @@ use Illuminate\Http\RedirectResponse;
 class ConcertController extends Controller
 {
     public function liste(){
-        return view("home", ["concert" => Concert::all()]);
+        // $admin = DB::table('users')->where('name', 'admin')->get();
+        $admin = User::where("name","admin")->get();
+        return view("home", ["concert" => Concert::all(), "admin"=>$admin[0]]);
     }
 
     public function storeview(){
