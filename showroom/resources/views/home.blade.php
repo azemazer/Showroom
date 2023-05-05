@@ -1,4 +1,5 @@
 @extends("template") @section("title", "Concerts") @section("content")
+<div class ="d-flex justify-content-center">
     <div class="d-flex justify-content-center">
         @forelse ($concert as $show)
         @if ($show->full)
@@ -36,18 +37,31 @@
         </ul>
         <div class="card-body">
             <a href="{{route('concert.show', $show)}}" class="btn btn-primary" value='viewconcert'>Reserver</a>
-          
+            <br>
+            <br>
+            @if ($admin->is(auth()->user()))
+            <a href="/addconcertview" type="button" class="btn btn-info btn-sm">Editer concert</a>
+            @endif
+            <br>
+            <br>
+            @if ($admin->is(auth()->user()))
+            <form method='POST' action="{{ route('concert.destroy', $show)}}">
+              @csrf
+              @method('delete')
+            <button href="route('concert.destroy', $show)" onclick="event.preventDefault(); this.closest('form').submit();" class="btn btn-info btn-sm">Supprimer concert</button>
+            @endif
         </div>
     </div>
+</div>
 
-        @endif
-        @empty
-        <h2> Pas de concerts. </h2>
-        @endforelse
-<div class="col-3 mt-2 ms-5"></div>
- <div class="col-3 mt-2 ms-5"></div>
-    </div>
-    @if ($admin->is(auth()->user()))
-                <a href="/addconcertview" type="button" class="btn btn-primary">Ajouter concert</a>
-                @endif
+            @endif
+            @empty
+            <h2> Pas de concerts. </h2>
+            @endforelse
+    <div class="col-3 mt-2 ms-5"></div>
+    <div class="col-3 mt-2 ms-5"></div>
+        
+        @if ($admin->is(auth()->user()))
+                    <a href="/addconcertview" type="button" class="btn btn-primary">Ajouter concert</a>
+                    @endif
 @endsection
