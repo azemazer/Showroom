@@ -35,9 +35,9 @@ class ConcertPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(User $user, Concert $concert): bool
     {
-        return $user()->is('admin');
+        return $this->update($user, $concert);
     }
 
     /**
