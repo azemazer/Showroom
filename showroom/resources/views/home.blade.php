@@ -39,6 +39,7 @@
           
         </div>
     </div>
+
         @endif
         @empty
         <h2> Pas de concerts. </h2>
@@ -46,4 +47,7 @@
 <div class="col-3 mt-2 ms-5"></div>
  <div class="col-3 mt-2 ms-5"></div>
     </div>
+    @if ($admin->is(auth()->user()))
+                <a href="/addconcertview" type="button" class="btn btn-primary">Ajouter concert</a>
+                @endif
 @endsection
